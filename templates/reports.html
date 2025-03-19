@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Patient Reports</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: #35424a;
+            color: white;
+        }
+        
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .search-form {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        .search-form input[type="text"] {
+            padding: 8px;
+            width: 70%;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .search-form button {
+            padding: 8px 15px;
+            background-color: #35424a;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    {% include 'base.html' %}
+    <div class="container">
+        <h1>Patient Reports</h1>
+        
+        <div class="search-form">
+            <form action="{{ url_for('reports') }}" method="get">
+                <label for="disease">Search patients by disease:</label>
+                <input type="text" id="disease" name="disease" value="{{ disease_query }}">
+                <button type="submit">Search</button>
+                {% if disease_query %}
+                <a href="{{ url_for('reports') }}">Clear search</a>
+                {% endif %}
+            </form>
+        </div>
+        
+        {% if patients %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Blood Group</th>
+                    <th>Type of Disease</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for patient in patients %}
+                <tr>
+                    <td>{{ patient['name'] }}</td>
+                    <td>{{ patient['age'] }}</td>
+                    <td>{{ patient['blood_group'] }}</td>
+                    <td>{{ patient['disease_type'] }}</td>
+                    <td><a href="{{ url_for('patient_details', patient_id=patient['id']) }}">View Details</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No patients found in the database.</p>
+        {% endif %}
+        <br>
+        <a href="{{ url_for('index') }}">Back to Home</a>
+    </div>
+</body>
+</html>

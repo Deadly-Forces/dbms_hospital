@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Patient Details</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Patient Details</h1>
+        <table>
+            <tr>
+                <th>Name</th>
+                <td>{{ patient.name }}</td>
+            </tr>
+            <tr>
+                <th>Age</th>
+                <td>{{ patient.age }}</td>
+            </tr>
+            <tr>
+                <th>Blood Group</th>
+                <td>{{ patient.blood_group }}</td>
+            </tr>
+            <tr>
+                <th>Type of Disease</th>
+                <td>{{ patient.disease_type }}</td>
+            </tr>
+        </table>
+        <a href="{{ url_for('index') }}">Back to Home</a>
+    </div>
+</body>
+</html>

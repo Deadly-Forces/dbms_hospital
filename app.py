@@ -59,6 +59,9 @@ def reports():
             'disease_type': p[4]
         })
     return render_template('reports.html', patients=patients, disease_query=disease_query)
-
+@app.route('/reset', methods=['POST'])
+def reset():
+    reset_database()
+    return redirect(url_for('index'))
 if __name__ == '__main__':
     app.run(debug=True)

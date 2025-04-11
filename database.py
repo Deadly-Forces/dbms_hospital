@@ -59,3 +59,10 @@ def get_patients_by_disease(disease_type):
     patients = cursor.fetchall()
     conn.close()
     return patients
+def reset_database():
+    conn = connect_db()
+    cursor = conn.cursor()
+    cursor.execute('DELETE FROM patients')
+    cursor.execute('DELETE FROM sqlite_sequence WHERE name="patients"')
+    conn.commit()
+    conn.close()

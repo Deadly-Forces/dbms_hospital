@@ -20,6 +20,9 @@
         <h2>Main Dashboard</h2>
         <p>Use the navigation above to manage patient records and generate reports.</p>
     </main>
+    <form action="{{ url_for('reset') }}" method="post">
+        <button type="submit" class="btn btn-danger">Reset Database</button>
+    </form>
     <footer>
         <p>&copy; 2023 Hospital Management System</p>
     </footer>
